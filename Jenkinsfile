@@ -14,7 +14,7 @@ pipeline{
                 docker{ image 'node:16-alpine'}
             }
             steps{
-                sh 'node --version'
+                sh 'exit 1'
             }
         }
         stage('Deploy'){
