@@ -1,5 +1,8 @@
 pipeline{
     agent none
+    environment{
+        Risultato = 'ok'
+    }
     stages{
         stage('Build'){
             agent{
@@ -16,16 +19,21 @@ pipeline{
             steps{
                 sh 'node --version'
             }
-            
+            post{
+                success{
+                    Risultato = 'ok'
+                }
+            }
         }
         stage('Deploy'){
-            
-            currentBuild.getPreviousBuild().result = 'SUCCESS'
+            when{
+                return params.Risultato == 'ok'
+            }
             input {
                 message "La build è avvenuta con successo vuoi procedere al deploy?"
                 ok "Effettua Deploy"
                 parameters {
-                string(defaultValue: 'No', name: 'Next_Step', trim: true) 
+                string(defaultValue: 'ok', name: 'Next_Step', trim: true) 
                 }
             }
             when {
