@@ -19,7 +19,9 @@ pipeline{
         }
         stage('Deploy'){
             when{
-                !("SUCCESS".equals(currentBuild.previousBuild.result))
+                expression{
+                    !("SUCCESS".equals(currentBuild.previousBuild.result))
+                }
             }
             input {
                 message "La build è avvenuta con successo vuoi procedere al deploy?"
