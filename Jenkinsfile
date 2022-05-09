@@ -16,12 +16,26 @@ pipeline{
             steps{
                 sh 'exit 1'
             }
+            post {
+                always {
+                    echo "Post-Test result: ${currentBuild.result}"
+                    echo "Post-Test currentResult: ${currentBuild.currentResult}"
+                }
+            }
         }
         stage('Deploy'){
             when{
                 expression{
                     !("SUCCESS".equals(currentBuild.previousBuild.result))
                 }
+
+                //Capire come concatenare i vari stage usando una sintassi adeguata... In questa prova ho utilizzato currentBuild.previousBuild.result
+                //perchè per motivi di privilegi
+                
+                // !("SUCCESS".equals(currentBuild.previousBuild.result))
+                //This will allow you to see the result of the previous build without needing 
+                //to have any special privileges set by the Jenkins administrator. It should be able to be run anywhere.
+
                 /*
                 input {
                     message "La build è avvenuta con successo vuoi procedere al deploy?"
@@ -52,7 +66,12 @@ pipeline{
         }
         
     }
-
+    post {
+        always {
+            echo "Pipeline result: ${currentBuild.result}"
+            echo "Pipeline currentResult: ${currentBuild.currentResult}"
+        }
+    }
 
 
 
