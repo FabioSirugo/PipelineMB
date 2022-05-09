@@ -23,12 +23,15 @@ pipeline{
                     !("SUCCESS".equals(currentBuild.previousBuild.result))
                 }
             }
-            input {
-                message "La build è avvenuta con successo vuoi procedere al deploy?"
-                ok "Effettua Deploy"
-                parameters {
-                string(defaultValue: 'ok', name: 'Next_Step', trim: true) 
+            steps{
+                input {
+                    message "La build è avvenuta con successo vuoi procedere al deploy?"
+                    ok "Effettua Deploy"
+                    parameters {
+                        string(defaultValue: 'ok', name: 'Next_Step', trim: true) 
+                    }
                 }
+
             }
             when {
                 expression { 
