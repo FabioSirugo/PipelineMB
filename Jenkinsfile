@@ -16,10 +16,22 @@ pipeline{
             steps{
                 sh 'node --version'
             }
+            
         }
         stage('Deploy'){
+            
+            currentBuild.getPreviousBuild().result = 'SUCCESS'
+            input {
+                message "La build è avvenuta con successo vuoi procedere al deploy?"
+                ok "Effettua Deploy"
+                parameters {
+                string(defaultValue: 'No', name: 'Next_Step', trim: true) 
+                }
+            }
             when {
-             branch 'master'
+                expression { 
+                    return params.Next_Step == 'Si'
+                }
             }
             steps{
                 echo "I'm deploying i'm in master branch"
