@@ -34,7 +34,7 @@ pipeline{
             }
         
             steps{
-                echo "I'm deploying i'm in master branch"
+                echo "I'm deploying i'm not in master branch"
             }
         }
         stage('Hotfix esempio'){
