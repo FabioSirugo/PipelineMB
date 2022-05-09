@@ -30,8 +30,9 @@ pipeline{
                 }
 
                 //Capire come concatenare i vari stage usando una sintassi adeguata... In questa prova ho utilizzato currentBuild.previousBuild.result
-                //perchè per motivi di privilegi
-                
+                //per motivi di privilegi
+                //Se lo stage precedente fallisce quelli successivi non verranno eseguiti. (chiedere direttamente deploy senza effettuare un controllo?)
+
                 // !("SUCCESS".equals(currentBuild.previousBuild.result))
                 //This will allow you to see the result of the previous build without needing 
                 //to have any special privileges set by the Jenkins administrator. It should be able to be run anywhere.
