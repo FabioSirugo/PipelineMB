@@ -22,7 +22,7 @@ pipeline{
                     echo "Post-Test currentResult: ${currentBuild.currentResult}"
                 }
                 failure{
-                    emailext(attachLog: true, body: 'Fallimento in fase di Test' , subject: 'Fallimento Test ramo feature', to: 'provajenkins8@gmail.com')
+                    emailext(attachLog: true, body: 'Fallimento in fase di Test' , subject: 'Fallimento Test ramo feature', to: 'fabiosirugo8@gmail.com')
                 }
             }
         }
