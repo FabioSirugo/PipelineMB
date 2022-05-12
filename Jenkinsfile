@@ -37,6 +37,11 @@ pipeline{
                 sh 'node --version'
                 echo "I'm in hotfix"
             }
+            post{
+                success{
+                    emailext(attachLog: true, body: 'Hotfix risolto, i test sono stati superati' , subject: 'Hotfix branch resault', to: 'fabiosirugo8@gmail.com')
+                }
+            }
         }
         
     }
